@@ -1,8 +1,10 @@
-package inscriptions;
+package metier;
 
 import java.io.Serializable;
 import java.util.Collections;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,14 +14,17 @@ import java.util.TreeSet;
  *
  */
 
-public class Competition implements Comparable<Competition>, Serializable
+public class Competition implements Comparable<Competition>
 {
-	private static final long serialVersionUID = -2882150118573759729L;
 	private Inscriptions inscriptions;
 	private String nom;
 	private Set<Candidat> candidats;
 	private LocalDate dateCloture;
 	private boolean enEquipe = false;
+	
+	Date input = new Date();
+	LocalDate date = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//	int ouvert = date.compareTo(getDateCloture());
 
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{
@@ -30,6 +35,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		candidats = new TreeSet<>();
 	}
 	
+
 	/**
 	 * Retourne le nom de la compétition.
 	 * @return
@@ -38,6 +44,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	public String getNom()
 	{
 		return nom;
+	}
+	public void setNom(String nom)
+	{
+		this.nom = nom;
 	}
 	
 	/**
@@ -48,7 +58,11 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean inscriptionsOuvertes()
 	{
 		// TODO retourner vrai si la date système est ultérieure à la date de clôture.
-		return true;
+		
+//		if (ouvert >0 )
+//		return true;
+//		else
+			return false;
 	}
 	
 	/**
@@ -71,6 +85,10 @@ public class Competition implements Comparable<Competition>, Serializable
 		return enEquipe;
 	}
 	
+	public boolean isEnEquipe() {
+		return enEquipe;
+	}
+	
 	/**
 	 * Modifie la date de cloture des inscriptions. Il est possible de la reculer 
 	 * mais pas de l'avancer.
@@ -80,7 +98,17 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void setDateCloture(LocalDate dateCloture)
 	{
 		// TODO vérifier que l'on avance pas la date.
-		this.dateCloture = dateCloture;
+		
+//		if (ouvert < 0 )
+//		{
+//			this.dateCloture = dateCloture;
+//			System.out.println("date modifié" );
+//		}
+//			
+//		else
+//			System.out.println("impossible d'avancer la date" );
+//	
+		
 	}
 	
 	/**
@@ -102,9 +130,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean add(Personne personne)
 	{
-		// TODO vérifier que la date de clôture n'est pas passée
-		if (enEquipe)
-			throw new RuntimeException();
+		// TODO vérifier que la date de clôture n'est pas passée 
+//		if (enEquipe || ouvert > 0)
+//			throw new RuntimeException();
 		personne.add(this);
 		return candidats.add(personne);
 	}
@@ -159,4 +187,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		return getNom();
 	}
+
+	
 }

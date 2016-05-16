@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>inscription</display-name>
+  <servlet>
+    <servlet-name>personne</servlet-name>
+    <servlet-class>web.PersoneControleurServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>personne</servlet-name>
+    <url-pattern>/personne.david</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Accueil</servlet-name>
+    <servlet-class>web.AccueilServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Accueil</servlet-name>
+    <url-pattern>/accueil.david</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Equipe</servlet-name>
+    <servlet-class>web.EquipeControleurServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Equipe</servlet-name>
+    <url-pattern>/equipe.david</url-pattern>
+  </servlet-mapping>
+
+ <servlet>
+    <servlet-name>Competition</servlet-name>
+    <servlet-class>web.CompetitionControleurServelet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Competition</servlet-name>
+    <url-pattern>/competition.david</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Inscription</servlet-name>
+    <servlet-class>web.InscriptionControleurServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Inscription</servlet-name>
+    <url-pattern>/inscription.david</url-pattern>
+  </servlet-mapping>
+</web-app>

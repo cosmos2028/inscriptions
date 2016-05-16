@@ -1,15 +1,22 @@
-package inscriptions;
+package metier;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.Collections;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import com.mysql.jdbc.PreparedStatement;
 
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
@@ -17,9 +24,8 @@ import java.util.TreeSet;
  * ainsi que d'inscrire des candidats à des compétition.
  */
 
-public class Inscriptions implements Serializable
+public class Inscriptions
 {
-	private static final long serialVersionUID = -3095339436048473524L;
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
 	
@@ -93,7 +99,7 @@ public class Inscriptions implements Serializable
 	 * @return
 	 */
 	
-	public Equipe createEquipe(String nom)
+	public Equipe createEquipe(String nom) 
 	{
 		Equipe equipe = new Equipe(this, nom);
 		candidats.add(equipe);
@@ -101,7 +107,7 @@ public class Inscriptions implements Serializable
 	}
 	
 	void remove(Competition competition)
-	{
+	{ 
 		competitions.remove(competition);
 	}
 	
@@ -213,24 +219,91 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
+		System.out.println("*********************implementation BDD*************************\n");
+
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
-		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-		flechettes.add(tony);
-		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
-		lesManouches.add(boris);
-		lesManouches.add(tony);
-		System.out.println(inscriptions);
-		lesManouches.delete();
-		System.out.println(inscriptions);
-		try
-		{
-			inscriptions.sauvegarder();
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Sauvegarde impossible." + e);
-		}
+		Connection con = SingletonConnection.getConnection();
+		MetierImpl metier = new MetierImpl();
+		
+//		for(Candidat equip : metier.GetAllEquipe())
+//		{
+//			System.out.println(equip.getNom());
+//		}
+//		Map<String, String> myMap = null;
+//		myMap = metier.SerchPersonneInEquipeParMC("a");
+//		for (Entry<String, String> currentEntry : myMap.entrySet()) {
+//			String id = currentEntry.getKey();
+//			String value = currentEntry.getValue();
+//			System.out.println( id +"\t"+ value +"\n");
+//		   
+//		}
+//		
+//		
+//		for (Map<String, String> e : metier.GetAllPersonneInEquipe())
+//			{
+//				System.out.println(pers.estEnEquipe()+ "\t"+"\n");
+//				
+//	
+//			}
+//		metier.DeletePersonneInEquipe("foot","jean");
+//		metier.DeletePersonne("lucie");
+//		System.out.println(metier.SerchEquipeParMC(""));
+//		System.out.println(metier.SerchPersonneParMC("l"));
+//		System.out.println(metier.SerchPersonneParMC("l"));
+//		metier.addPersonne(inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"));
+//		metier.addPersonne(inscriptions.createPersonne("jean","emile","leot@gmail.com"));
+//		SortedSet<Competition> AllPers = metier.GetAllCompetInscrit("dol");
+//		for(Competition pers : AllPers)
+//		{
+//			System.out.println(pers.getNom()+ "\n");
+////			System.out.println(pers.toString());
+//
+//		}
+//		metier.addEquipe(inscriptions.createEquipe("foot"));
+//  	metier.addEquipe(inscriptions.createEquipe("foot"));
+//		LocalDate today = LocalDate.now();
+//		metier.UpdateCompetition(inscriptions.createCompetition("Mondial de fléchettes",today, false),"foot");
+//		metier.addCompetition(inscriptions.createCompetition("Mondial de fléchettes",today, false));
+		
+//		metier.addInscrit("foot", "Mondial de fléchettes");
+//		metier.addPersonneInEquipe("foot", "tony");
+//		metier.addPersonneInEquipe("foot", "kk");
+//		
+//        
+//		System.out.println("*********************implementation BDD*************************\n");
+//		
+//		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
+//		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
+//				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+//		flechettes.add(tony);
+//		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
+//		lesManouches.add(boris);
+//		lesManouches.add(tony);
+//		System.out.println(inscriptions);
+//		lesManouches.delete();
+//		System.out.println(inscriptions);
+//		try
+//		{
+//			inscriptions.sauvegarder();
+//		} 
+//		catch (IOException e)
+//		{
+//			System.out.println("Sauvegarde impossible." + e);
+//		}
+//		LocalDate today = LocalDate.of(2020, 03, 05);
+//		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", today, false);
+//		LocalDate today2 = LocalDate.of(2030, 03, 05);
+//		flechettes.setDateCloture(today2);
+//		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty");
+//		try {
+//			flechettes.add(tony);
+//			
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+		
+		
+//		System.out.println(flechettes.inscriptionsOuvertes());
+
 	}
 }

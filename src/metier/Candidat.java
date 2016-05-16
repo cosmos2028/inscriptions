@@ -1,4 +1,4 @@
-package inscriptions;
+package metier;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -10,12 +10,12 @@ import java.util.TreeSet;
  *
  */
 
-public abstract class Candidat implements Comparable<Candidat>, Serializable
+public abstract class Candidat implements Comparable<Candidat>
 {
-	private static final long serialVersionUID = -6035399822298694746L;
 	private Inscriptions inscriptions;
 	private String nom;
 	private Set<Competition> competitions;
+	
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{
@@ -23,6 +23,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		this.nom = nom;
 		competitions = new TreeSet<>();
 	}
+	
 
 	/**
 	 * Retourne le nom du candidat.
